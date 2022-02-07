@@ -1,1 +1,1 @@
-[![Visits Badge](https://badges.pufler.dev/visits/rufflet/git-badges)](https://badges.pufler.dev)
+[![Visits Badge](https://badges.pufler.dev/visits/Rufflet/Rufflet)](https://badges.pufler.dev)
