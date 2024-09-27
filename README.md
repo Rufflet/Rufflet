@@ -2,8 +2,6 @@
 
 My name is Alex Ershov and I'm a Front-end Dev who likes map 🗺 & graph 📈 data.
 
-- 💬 Ask me about anything
-- 📫 My LinkedIn DM is open 🧐
-
-[![LinkedIn](https://a11ybadges.com/badge?logo=linkedin)](https://www.linkedin.com/in/aleksandr-ershov/)
+[![Upwork](https://a11ybadges.com/badge?logo=upwork&text=hire_me)](https://www.upwork.com/freelancers/~0175333b8b4aefa403/)
+[![Agency](https://a11ybadges.com/badge?logo=at-sign&text=ValidStack&badgeColor=007dc8)](https://www.upwork.com/agencies/validstack/)
 [![Observable](https://a11ybadges.com/badge?logo=observable)](https://observablehq.com/@rufflet)
