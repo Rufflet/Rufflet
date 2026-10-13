@@ -1,0 +1,27 @@
+{
+  "name": "rufflet-profile-generator",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsx src/build.ts",
+    "typecheck": "vue-tsc --noEmit",
+    "snap": "tsx src/snap.ts"
+  },
+  "dependencies": {
+    "vue": "^3.5.44"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "fontkit": "^2.0.4",
+    "github-markdown-css": "^5.9.0",
+    "jetbrains-mono": "^1.0.6",
+    "playwright-core": "^1.64.0",
+    "subset-font": "^2.9.0",
+    "tsx": "^4.23.15",
+    "typescript": "5.9",
+    "vite": "^6.4.4",
+    "vue-tsc": "^3.3.13"
+  }
+}

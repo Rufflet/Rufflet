@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Profile SVG preview</title>
+    <style>
+      :root { font: 14px/1.5 system-ui, sans-serif; }
+      body { margin: 0; background: #888; }
+      header { position: sticky; top: 0; z-index: 1; display: flex; gap: 12px; align-items: center; padding: 10px 16px; background: #222; color: #eee; }
+      button { font: inherit; padding: 4px 12px; border-radius: 6px; border: 1px solid #555; background: #333; color: #eee; cursor: pointer; }
+      main { display: grid; grid-template-columns: 1fr 1fr; }
+      section { padding: 24px; min-width: 0; }
+      section.light { background: #ffffff; color-scheme: light; }
+      section.dark { background: #0d1117; color-scheme: dark; color: #e6edf3; }
+      figure { margin: 0 0 24px; }
+      figcaption { font: 12px ui-monospace, monospace; opacity: .6; margin-bottom: 6px; }
+      img { max-width: 100%; display: block; }
+      @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+    </style>
+  </head>
+  <body>
+    <header>
+      <strong>assets preview</strong>
+      <button id="replay">Replay animations</button>
+      <span style="opacity:.6">Each SVG picks its palette from prefers-color-scheme — toggle it in DevTools › Rendering.</span>
+    </header>
+    <main id="root"></main>
+    <script type="module" src="./main.ts"></script>
+  </body>
+</html>
