@@ -4,7 +4,8 @@ import { links, profile, projects, shipped, type Project } from './profile.confi
 
 const assetsDir = new URL('../../assets/', import.meta.url)
 
-// GitHub caches /raw/ images by URL for minutes; a content hash makes every rebuild show up at once.
+// A content hash per image stops browsers reusing a stale copy after a rebuild. (GitHub's raw CDN
+// drops the query on redirect and may still serve the old file for up to 5 minutes.)
 const src = (file: string) =>
   `assets/${file}?v=${createHash('sha1').update(readFileSync(new URL(file, assetsDir))).digest('hex').slice(0, 8)}`
 
