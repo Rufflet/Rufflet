@@ -31,9 +31,6 @@ const keyWidth = Math.max(...props.facts.map(([k]) => k.length)) + 2
 const logoTop = props.y - 14 + ((props.facts.length + 2) * lh - logo.length * (cell + gap)) / 2
 const pixels = logo.flatMap((row, r) => [...row].flatMap((ch, c) => (ch === '#' ? [{ r, c }] : [])))
 const step = 0.11
-const swatchY = props.y + (props.facts.length + 2) * lh + 8
-const swatches = ['ac', 'y', 'g', 'c', 'p', 'logo', 't', 'm']
-const swatchStart = props.start + (props.facts.length + 2) * step + 0.15
 </script>
 
 <template>
@@ -68,15 +65,5 @@ const swatchStart = props.start + (props.facts.length + 2) * step + 0.15
       :segs="key === 'status' ? [[key.padEnd(keyWidth), 'p b'], ['● ', 'g'], [value]] : [[key.padEnd(keyWidth), 'p b'], [value]]"
     />
 
-    <rect
-      v-for="(color, i) in swatches"
-      :key="color"
-      :class="`a ${color}`"
-      :style="at(swatchStart + i * 0.05)"
-      :x="infoX + i * cw * 3"
-      :y="swatchY - 12"
-      :width="cw * 3"
-      height="14"
-    />
   </g>
 </template>

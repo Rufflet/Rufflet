@@ -30,8 +30,10 @@ const t = {
   reply: typed + 1.95,
   card: typed + 2.35,
 }
-const finalRow = 7 + cardRows + 2
-const finalAt = t.card + (cardRows + 2) * 0.11 + 0.9
+const tipRow = 7 + cardRows + 1
+const tipAt = t.card + cardRows * 0.11 + 0.6
+const finalRow = tipRow + profile.tip.length + 1
+const finalAt = tipAt + 0.7
 const H = row(finalRow) + 26
 
 </script>
@@ -58,6 +60,15 @@ const H = row(finalRow) + 26
       />
       <Line class="a" :style="at(t.reply)" :x="X" :y="row(5)" :segs="[['●', 'ac'], [' ' + profile.reply]]" />
       <NeofetchCard :x="X + 24" :y="row(7)" :user="`alex@${profile.host}`" :facts="profile.facts" :start="t.card" />
+      <g class="a" :style="at(tipAt)">
+        <Line
+          v-for="(segs, i) in profile.tip"
+          :key="i"
+          :x="X"
+          :y="row(tipRow + i)"
+          :segs="i === 0 ? [['●', 'ac'], [' '], ...segs] : [['  '], ...segs]"
+        />
+      </g>
       <g class="a" :style="at(finalAt)">
         <Line :x="X" :y="row(finalRow)" :segs="[[cwd, 'c'], [' ❯ ', 'g']]" />
         <rect class="blink ac" :x="X + (cwd.length + 3) * metrics.charWidth" :y="row(finalRow) - 14" :width="metrics.charWidth" height="18" />

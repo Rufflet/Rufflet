@@ -37,7 +37,7 @@ export const profile = {
   name: 'Alex Ershov',
   host: 'rufflet',
   prompt: 'claude "who is rufflet?"',
-  tool: { name: 'github.profile', args: 'user: "Rufflet"', result: 'fetched profile · 4 live products · 3 open source' },
+  tool: { name: 'github.profile', args: 'user: "Rufflet"', result: 'fetched profile · 4 live products · 2 open source' },
   reply: "Here's who you're looking at:",
   facts: [
     ['role', 'full-stack TypeScript · AI integrations'],
@@ -45,29 +45,24 @@ export const profile = {
     ['ai', 'MCP servers · agents · in-house AI tooling'],
     ['data', 'AI modules for MySQL / PostgreSQL / Oracle'],
     ['viz', 'd3.js'],
-    ['runs', 'ValidStack (founder) — validstack.pro'],
+    ['at', 'ValidStack — lead engineer'],
     ['status', 'open to projects via ValidStack'],
   ] as [string, string][],
+  /** Closing hint from the agent — points at the product we most want people to try. */
+  tip: [
+    [['Tip: his main project is '], ['md2file.com', 'ac b'], [' —']],
+    [['Markdown → PDF / HTML right in the browser.']],
+  ] as [string, string?][][],
 }
 
 export const shipped: Project[] = [
   {
-    slug: 'casascalea',
-    kind: 'live',
-    name: 'casascalea.it',
-    title: 'Real-estate platform in Calabria',
-    description: 'Listings with map search and favorites in EN / RU / IT, backed by its own API.',
-    tags: ['Nuxt', 'Node API', 'client'],
-    href: 'https://casascalea.it',
-    visible: true,
-  },
-  {
     slug: 'md2file',
     kind: 'live',
     name: 'md2file.com',
-    title: 'Markdown editor → PDF / HTML',
-    description: 'Live preview, Mermaid and LaTeX, plus AI tools to rewrite and summarize.',
-    tags: ['Vue', 'TypeScript', 'AI'],
+    title: 'Markdown → PDF / HTML, as a SaaS',
+    description: 'Online editor with live preview, Mermaid, LaTeX and AI writing tools.',
+    tags: ['SaaS', 'Vue', 'AI'],
     href: utm('https://md2file.com/', 'md2file'),
     visible: true,
   },
@@ -92,6 +87,16 @@ export const shipped: Project[] = [
     href: utm('https://md2file.com/ai-chat-exporter/', 'ai_chat_exporter'),
     visible: true,
   },
+  {
+    slug: 'casascalea',
+    kind: 'live',
+    name: 'casascalea.it',
+    title: 'Real-estate platform in Calabria',
+    description: 'Listings with map search and favorites in EN / RU / IT, managed in Strapi.',
+    tags: ['Nuxt', 'Strapi', 'client'],
+    href: 'https://casascalea.it',
+    visible: true,
+  },
 ]
 
 export const projects: Project[] = [
@@ -113,16 +118,6 @@ export const projects: Project[] = [
     description: 'A JavaScript library for building process diagrams.',
     tags: ['SVG', 'JavaScript', 'diagrams'],
     href: 'https://github.com/Rufflet/svg.bpmn.js',
-    visible: true,
-  },
-  {
-    slug: 'profile',
-    kind: 'oss',
-    name: 'rufflet',
-    title: 'This profile, rendered by Vue',
-    description: 'Vue SSR → animated, theme-aware SVG. No JS ships to GitHub.',
-    tags: ['Vue', 'TypeScript', 'SVG'],
-    href: 'https://github.com/Rufflet/Rufflet',
     visible: true,
   },
   {

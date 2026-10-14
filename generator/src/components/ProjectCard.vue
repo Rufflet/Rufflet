@@ -29,7 +29,8 @@ function wrap(text: string, width: number): string[] {
 
 const blurb = wrap(props.project.description, maxChars)
 const y = { head: 34, title: 66, blurb: 90 }
-const tagsY = y.blurb + blurb.length * metrics.lineHeight + 14
+// Reserve two blurb lines so cards sharing a row always have the same height.
+const tagsY = y.blurb + Math.max(2, blurb.length) * metrics.lineHeight + 14
 const H = tagsY + 30
 
 const isLive = props.project.kind === 'live'
