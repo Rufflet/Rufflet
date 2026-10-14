@@ -5,12 +5,13 @@
 text{font-family:RuffletMono,ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;fill:var(--text);white-space:pre}
 .b{font-weight:700}.sm{font-size:12px}
 .m{fill:var(--muted)}.ac{fill:var(--accent)}.g{fill:var(--green)}.c{fill:var(--cyan)}.p{fill:var(--purple)}.y{fill:var(--yellow)}.t{fill:var(--text)}
-.bg{fill:var(--bg)}.bar{fill:var(--bar)}.bd{stroke:var(--border)}.nf{fill:none}
+.bg{fill:var(--bg)}.bar{fill:var(--bar)}.bd{stroke:var(--border)}.acs{stroke:var(--accent);stroke-width:1.5}.nf{fill:none}
 .logo{fill:url(#logo-grad)}.s0{stop-color:var(--g0)}.s1{stop-color:var(--g1)}
 .a{opacity:0;animation:in .32s ease-out forwards}
 .tmp{opacity:0;animation:in .2s ease-out forwards,out .15s ease-in forwards}
 .blink{animation:blink 1.06s steps(1) infinite}
 .pulse{animation:pulse .7s ease-in-out infinite}
+.live{animation:pulse 2.4s ease-in-out infinite}
 @keyframes in{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
 @keyframes out{from{opacity:1}to{opacity:0}}
 @keyframes blink{50%{opacity:0}}
@@ -20,4 +21,4 @@ text{font-family:RuffletMono,ui-monospace,SFMono-Regular,Menlo,Consolas,monospac
   *{animation:none!important}
   .a{opacity:1}
   .tmp,.typer{display:none}
-}</style><rect x="0.5" y="0.5" width="409" height="175" rx="10" class="bg bd"></rect><rect x="0.5" y="16" width="3" height="144" rx="1.5" class="ac"></rect><text y="34" class="a" style="animation-delay:0.10s;"><tspan x="22" class="m">~/projects/</tspan><tspan x="114.4" class="ac b">mysql-legacy-mcp</tspan></text><text class="a m" style="animation-delay:0.10s" x="388" y="34" text-anchor="end">↗</text><line style="animation-delay:0.15s" x1="22" x2="388" y1="45" y2="45" class="a bd" stroke-dasharray="3 4"></line><text y="66" class="a" style="animation-delay:0.25s;"><tspan x="22" class="b">MCP server for legacy MySQL 5.0–5.6</tspan></text><text y="90" class="a" style="animation-delay:0.35s;"><tspan x="22" class="m">Schema inspection &amp; SELECT by default,</tspan></text><text y="111" class="a" style="animation-delay:0.43s;"><tspan x="22" class="m">opt-in writes. Verified on 5.0–8.0.</tspan></text><g class="a" style="animation-delay:0.50s"><rect x="22.5" y="130.5" width="39.6" height="22" rx="11" class="nf bd"></rect><text class="c sm" x="31.5" y="146">MCP</text></g><g class="a" style="animation-delay:0.58s"><rect x="70.1" y="130.5" width="46.8" height="22" rx="11" class="nf bd"></rect><text class="c sm" x="79.1" y="146">Node</text></g><g class="a" style="animation-delay:0.66s"><rect x="124.89999999999999" y="130.5" width="39.6" height="22" rx="11" class="nf bd"></rect><text class="c sm" x="133.89999999999998" y="146">npm</text></g></svg>
+}</style><rect x="0.5" y="0.5" width="409" height="175" rx="10" class="bg bd"></rect><rect x="0.5" y="16" width="3" height="144" rx="1.5" class="ac"></rect><text y="34"><tspan x="22" class="m">~/projects/</tspan><tspan x="114.4" class="ac b">mysql-legacy-mcp</tspan></text><text class="m" x="388" y="34" text-anchor="end">↗</text><line x1="22" x2="388" y1="45" y2="45" class="bd" stroke-dasharray="3 4"></line><text y="66"><tspan x="22" class="b">MCP server for legacy MySQL 5.0–5.6</tspan></text><text y="90"><tspan x="22" class="m">Schema inspection &amp; SELECT by default,</tspan></text><text y="111"><tspan x="22" class="m">opt-in writes. Verified on 5.0–8.0.</tspan></text><g><rect x="22.5" y="130.5" width="39.6" height="22" rx="11" class="nf bd"></rect><text class="c sm" x="31.5" y="146">MCP</text></g><g><rect x="70.1" y="130.5" width="46.8" height="22" rx="11" class="nf bd"></rect><text class="c sm" x="79.1" y="146">Node</text></g><g><rect x="124.89999999999999" y="130.5" width="39.6" height="22" rx="11" class="nf bd"></rect><text class="c sm" x="133.89999999999998" y="146">npm</text></g></svg>

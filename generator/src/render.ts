@@ -2,7 +2,7 @@ import { createSSRApp, h, type Component } from 'vue'
 import { renderToString } from 'vue/server-renderer'
 import { fontFaceCss } from './font'
 import { baseCss, FONT_SLOT } from './styles'
-import { links, projects } from './profile.config'
+import { links, projects, shipped } from './profile.config'
 import TerminalSession from './components/TerminalSession.vue'
 import ProjectCard from './components/ProjectCard.vue'
 import LinkButton from './components/LinkButton.vue'
@@ -32,7 +32,7 @@ async function renderSvg(component: Component, props: Record<string, unknown> = 
 
 export const outputs: Output[] = [
   { file: 'terminal.svg', render: () => renderSvg(TerminalSession) },
-  ...projects
+  ...[...shipped, ...projects]
     .filter((p) => p.visible)
     .map((project) => ({ file: `project-${project.slug}.svg`, render: () => renderSvg(ProjectCard, { project }) })),
   ...links

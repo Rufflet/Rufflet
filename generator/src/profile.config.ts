@@ -1,8 +1,10 @@
 // Single source of truth for everything rendered into the profile.
-// Edit this file, then run `npm run build` to regenerate ../assets/*.svg.
+// Edit this file, then run `npm run build` to regenerate ../assets/*.svg and the README blocks.
 
 export interface Project {
   slug: string
+  /** `oss` cards show a ~/projects path; `live` cards show the product's domain with a live dot. */
+  kind: 'oss' | 'live'
   name: string
   title: string
   description: string
@@ -16,7 +18,18 @@ export interface Link {
   slug: string
   label: string
   href: string
+  /** The one call to action that gets the accent treatment. */
+  primary?: boolean
   visible: boolean
+}
+
+/** Tags our own product links so visits from this profile show up in analytics. */
+const utm = (url: string, campaign: string) => {
+  const u = new URL(url)
+  u.searchParams.set('utm_source', 'github')
+  u.searchParams.set('utm_medium', 'profile')
+  u.searchParams.set('utm_campaign', campaign)
+  return u.toString()
 }
 
 export const profile = {
@@ -24,21 +37,67 @@ export const profile = {
   name: 'Alex Ershov',
   host: 'rufflet',
   prompt: 'claude "who is rufflet?"',
-  tool: { name: 'github.profile', args: 'user: "Rufflet"', result: 'fetched profile · 4 pinned repos · 1 org' },
+  tool: { name: 'github.profile', args: 'user: "Rufflet"', result: 'fetched profile · 4 live products · 3 open source' },
   reply: "Here's who you're looking at:",
   facts: [
-    ['role', 'Forward Deployed Engineer · full-stack · AI'],
-    ['stack', 'TypeScript · Vue / Nuxt · Node · MCP'],
-    ['builds', 'MCP servers, AI integrations, dev tools'],
-    ['at', 'ValidStack — validstack.pro'],
-    ['likes', 'maps & graph data'],
-    ['status', 'open to projects'],
+    ['role', 'full-stack TypeScript · AI integrations'],
+    ['stack', 'TypeScript · Vue / Nuxt · Node'],
+    ['ai', 'MCP servers · agents · in-house AI tooling'],
+    ['data', 'AI modules for MySQL / PostgreSQL / Oracle'],
+    ['viz', 'd3.js'],
+    ['runs', 'ValidStack (founder) — validstack.pro'],
+    ['status', 'open to projects via ValidStack'],
   ] as [string, string][],
 }
+
+export const shipped: Project[] = [
+  {
+    slug: 'casascalea',
+    kind: 'live',
+    name: 'casascalea.it',
+    title: 'Real-estate platform in Calabria',
+    description: 'Listings with map search and favorites in EN / RU / IT, backed by its own API.',
+    tags: ['Nuxt', 'Node API', 'client'],
+    href: 'https://casascalea.it',
+    visible: true,
+  },
+  {
+    slug: 'md2file',
+    kind: 'live',
+    name: 'md2file.com',
+    title: 'Markdown editor → PDF / HTML',
+    description: 'Live preview, Mermaid and LaTeX, plus AI tools to rewrite and summarize.',
+    tags: ['Vue', 'TypeScript', 'AI'],
+    href: utm('https://md2file.com/', 'md2file'),
+    visible: true,
+  },
+  {
+    slug: 'md2pdf-chrome',
+    kind: 'live',
+    name: 'Markdown to PDF',
+    title: 'Chrome extension: .md → PDF',
+    description: 'Mermaid, KaTeX and CJK in the browser. Free, no sign-up.',
+    tags: ['Chrome', 'extension'],
+    href: utm('https://chromewebstore.google.com/detail/markdown-to-pdf-converter/mcajoeddbjfiaddbklgndfgidjghmgel', 'md2pdf_extension'),
+    visible: true,
+  },
+  {
+    slug: 'ai-chat-exporter',
+    kind: 'live',
+    name: 'AI Chat Exporter',
+    title: 'Save AI chats as clean PDFs',
+    description: 'ChatGPT, Claude, Gemini, Grok, DeepSeek and more. Chrome + Safari for Mac.',
+    tags: ['Chrome', 'Safari', 'AI'],
+    // Landing page links to both the Chrome Web Store and the Mac App Store.
+    href: utm('https://md2file.com/ai-chat-exporter/', 'ai_chat_exporter'),
+    visible: true,
+  },
+]
 
 export const projects: Project[] = [
   {
     slug: 'mysql-legacy-mcp',
+    kind: 'oss',
     name: 'mysql-legacy-mcp',
     title: 'MCP server for legacy MySQL 5.0–5.6',
     description: 'Schema inspection & SELECT by default, opt-in writes. Verified on 5.0–8.0.',
@@ -47,16 +106,8 @@ export const projects: Project[] = [
     visible: true,
   },
   {
-    slug: 'md2file',
-    name: 'md2file',
-    title: 'Markdown → PDF browser extension',
-    description: 'Mermaid, KaTeX math and CJK out of the box. Built at ValidStack.',
-    tags: ['Chrome', 'TypeScript', 'ValidStack'],
-    href: 'https://md2file.com/extension',
-    visible: true,
-  },
-  {
     slug: 'svg-bpmn-js',
+    kind: 'oss',
     name: 'svg.bpmn.js',
     title: 'BPMN-like flowcharts in pure SVG',
     description: 'A JavaScript library for building process diagrams.',
@@ -66,6 +117,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'profile',
+    kind: 'oss',
     name: 'rufflet',
     title: 'This profile, rendered by Vue',
     description: 'Vue SSR → animated, theme-aware SVG. No JS ships to GitHub.',
@@ -75,6 +127,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'win31-messenger',
+    kind: 'oss',
     name: 'retro-messenger',
     title: 'A modern messenger for Windows 3.1',
     description: 'What would chat look like if it shipped in 1992?',
@@ -84,13 +137,9 @@ export const projects: Project[] = [
   },
 ]
 
-// TODO(owner): fill in hrefs for email / linkedin / x / telegram and set visible: true.
 export const links: Link[] = [
-  { slug: 'upwork', label: 'hire me on upwork', href: 'https://www.upwork.com/freelancers/~0175333b8b4aefa403/', visible: true },
-  { slug: 'validstack', label: 'validstack.pro', href: 'https://validstack.pro', visible: true },
+  { slug: 'validstack', label: 'work with me → validstack.pro', href: utm('https://validstack.pro/', 'profile_cta'), primary: true, visible: true },
+  { slug: 'upwork', label: 'ValidStack on Upwork', href: 'https://www.upwork.com/agencies/validstack/', visible: true },
+  { slug: 'telegram', label: 'telegram', href: 'https://t.me/notonlycodes', visible: true },
   { slug: 'observable', label: 'observable', href: 'https://observablehq.com/@rufflet', visible: true },
-  { slug: 'email', label: 'email', href: '', visible: false },
-  { slug: 'linkedin', label: 'linkedin', href: '', visible: false },
-  { slug: 'x', label: 'x', href: '', visible: false },
-  { slug: 'telegram', label: 'telegram', href: '', visible: false },
 ]

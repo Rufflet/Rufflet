@@ -1,4 +1,4 @@
-import { links, projects } from './profile.config'
+import { links, projects, shipped, type Project } from './profile.config'
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;')
 
@@ -7,12 +7,15 @@ const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;')
 const linkedImage = (href: string, file: string, alt: string, size: string) =>
   `<a href="${esc(href)}"><img alt="${esc(alt)}" src="assets/${file}" ${size}></a>`
 
+const cards = (list: Project[]) =>
+  list
+    .filter((p) => p.visible)
+    .map((p) => linkedImage(p.href, `project-${p.slug}.svg`, `${p.name} — ${p.title}`, 'width="49%"'))
+    .join('\n')
+
 const blocks: Record<string, () => string> = {
-  projects: () =>
-    projects
-      .filter((p) => p.visible)
-      .map((p) => linkedImage(p.href, `project-${p.slug}.svg`, `${p.name} — ${p.title}`, 'width="49%"'))
-      .join('\n'),
+  shipped: () => cards(shipped),
+  projects: () => cards(projects),
   links: () =>
     links
       .filter((l) => l.visible)
@@ -23,7 +26,7 @@ const blocks: Record<string, () => string> = {
 /** Rewrites every `<!-- name:start --> … <!-- name:end -->` block from the config. */
 export function updateReadme(readme: string): string {
   return readme.replace(
-    /(<!-- (\w+):start -->\n)[\s\S]*?(\n<!-- \2:end -->)/g,
-    (whole, open: string, name: string, close: string) => (blocks[name] ? open + blocks[name]() + close : whole),
+    /(<!-- (\w+):start -->)[\s\S]*?(<!-- \2:end -->)/g,
+    (whole, open: string, name: string, close: string) => (blocks[name] ? `${open}\n${blocks[name]()}\n${close}` : whole),
   )
 }
