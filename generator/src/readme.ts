@@ -1,11 +1,19 @@
-import { links, projects, shipped, type Project } from './profile.config'
+import { createHash } from 'node:crypto'
+import { readFileSync } from 'node:fs'
+import { links, profile, projects, shipped, type Project } from './profile.config'
+
+const assetsDir = new URL('../../assets/', import.meta.url)
+
+// GitHub caches /raw/ images by URL for minutes; a content hash makes every rebuild show up at once.
+const src = (file: string) =>
+  `assets/${file}?v=${createHash('sha1').update(readFileSync(new URL(file, assetsDir))).digest('hex').slice(0, 8)}`
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;')
 
 // Plain <a><img>, not <picture>: GitHub wraps every <img> in its own link, which splits an
 // outer <a> around <picture> and makes the card open the raw SVG. Theming lives inside each SVG.
 const linkedImage = (href: string, file: string, alt: string, size: string) =>
-  `<a href="${esc(href)}"><img alt="${esc(alt)}" src="assets/${file}" ${size}></a>`
+  `<a href="${esc(href)}"><img alt="${esc(alt)}" src="${src(file)}" ${size}></a>`
 
 const cards = (list: Project[]) =>
   list
@@ -14,6 +22,8 @@ const cards = (list: Project[]) =>
     .join('\n')
 
 const blocks: Record<string, () => string> = {
+  hero: () =>
+    `<img alt="${esc(`Terminal session: claude asks 'who is rufflet?' and prints ${profile.name}'s profile — ${profile.facts.map(([k, v]) => `${k}: ${v}`).join('; ')}.`)}" src="${src('terminal.svg')}" width="100%">`,
   shipped: () => cards(shipped),
   projects: () => cards(projects),
   links: () =>
